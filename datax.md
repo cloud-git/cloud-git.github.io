@@ -255,8 +255,13 @@ Engine entry 开始时 会打印一次。
 job 中 report 周期中会打印。 这个是 job的vm。
 job 完成时 finally 会 打印一次。
 
-
 看代码，如果TaskGroupContainer 是跑在 distribute 模式下 finally 也会打印一次。
+
+3. 重试
+
+job 里 收集状态，失败就throw 出来 没有重试。
+
+taskGroup失败可以重试。taskExecutor.supportFailOver() 其实就是 writer plugin 的supportFailOver();如MysqlWriter，就是判断插入模式是不是replace。taskMaxRetryTimes 默认是1.
 
 ## todo
 
